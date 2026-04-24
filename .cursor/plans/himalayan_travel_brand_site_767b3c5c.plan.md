@@ -4,25 +4,25 @@ overview: Build a cinematic, editorial Next.js site for a curated Himalayan trav
 todos:
   - id: scaffold
     content: Scaffold Next.js + TS + Tailwind project in workspace root; install framer-motion, lucide-react, clsx, tailwind-merge
-    status: in_progress
+    status: completed
   - id: design-system
     content: Configure Tailwind tokens (sand/cream/ink/forest/copper), Fraunces + Inter fonts via next/font, global utilities in app/globals.css, next.config image/video remote patterns
-    status: pending
+    status: completed
   - id: layout-globals
     content: Build Navbar (scroll-aware), Footer, FloatingWhatsApp, SectionReveal, Button, and cn util; wire into app/layout.tsx with lib/site.ts brand config
-    status: pending
+    status: completed
   - id: home
     content: "Build homepage sections: Hero (Pexels video + overlay), FeaturedTrips, Journey, Gallery (image zoom), Testimonials, CtaBand — with alternating light/dark rhythm"
-    status: pending
+    status: completed
   - id: tours
     content: Build data/tours.ts (6 sample Himalayan trips), tours listing with filter chips, and tour detail page with hero, itinerary accordion, gallery, and sticky inquiry sidebar
-    status: pending
+    status: completed
   - id: about-contact
     content: Build About (editorial story + pillars + team grid) and Contact (form + WhatsApp/email/phone + static map)
-    status: pending
+    status: completed
   - id: polish
     content: Responsive/mobile audit, fix linter errors, verify motion restraint, confirm floating WhatsApp on every page, write concise README
-    status: pending
+    status: completed
 isProject: false
 ---
 

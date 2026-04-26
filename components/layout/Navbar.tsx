@@ -29,6 +29,8 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
+  // Close mobile menu when the route changes (pathname is the external signal).
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on navigation
   useEffect(() => setOpen(false), [pathname]);
 
   return (

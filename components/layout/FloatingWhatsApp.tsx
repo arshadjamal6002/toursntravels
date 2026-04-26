@@ -1,10 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { waLink } from "@/lib/site";
 
 export function FloatingWhatsApp() {
+  const pathname = usePathname();
+  const isTourDetail = /^\/tours\/[^/]+$/.test(pathname);
+
+  if (isTourDetail) {
+    return null;
+  }
+
   return (
     <motion.a
       href={waLink()}

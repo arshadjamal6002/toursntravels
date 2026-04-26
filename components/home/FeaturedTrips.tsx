@@ -7,10 +7,10 @@ import { cn } from "@/components/ui/cn";
 const featured = [
   {
     slug: "ladakh-cinematic-circuit",
-    title: "Ladakh Cinematic Circuit",
+    title: "Leh Ladakh Bike Trip (5N/6D) · Flights",
     region: "Ladakh",
-    signature: "Lakes · Monasteries · High roads",
-    meta: "8 days · From ₹42,000",
+    signature: "Ex Delhi · Flights included · Premium adventure",
+    meta: "6 days · Ride Khardung La & Chang La",
     image:
       "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2400&q=80",
   },

@@ -4,6 +4,26 @@ export type TourItineraryDay = {
   details: string;
 };
 
+export type TourQuickFacts = {
+  duration: string;
+  route: string;
+  flightsIncluded: boolean;
+  bikeType?: string;
+  stayType?: string;
+  mealPlan?: string;
+};
+
+export type TourOffer = {
+  badge?: string;
+  headline?: string;
+  earlyBird?: string;
+  filling?: string;
+};
+
+export type TourFaqItem = { q: string; a: string };
+
+export type TourWhyStandsOut = { title: string; desc: string };
+
 export type Tour = {
   slug: string;
   title: string;
@@ -15,20 +35,101 @@ export type Tour = {
   heroImage: string;
   gallery: string[];
   overview: string;
+  subtitle?: string;
+  hookLine?: string;
+  /** Hero trust line chips, e.g. Ex Delhi, Flights Included, 5N/6D */
+  trustChips?: string[];
+  quickFacts?: TourQuickFacts;
+  offer?: TourOffer;
+  faq?: TourFaqItem[];
+  whyStandsOut?: TourWhyStandsOut[];
   itinerary: TourItineraryDay[];
   included: string[];
   excluded: string[];
+  highlights?: string[];
+  importantNotes?: string[];
 };
 
 export const tours: Tour[] = [
   {
     slug: "ladakh-cinematic-circuit",
-    title: "Ladakh Cinematic Circuit",
+    title: "Leh Ladakh Bike Trip with Flights (5N/6D)",
     region: "Ladakh",
-    days: 8,
+    days: 6,
     priceFrom: 42000,
     difficulty: "Moderate",
     bestSeason: "Jun–Sep",
+    trustChips: ["Ex Delhi", "Flights Included", "5N/6D", "600+ KM Circuit"],
+    quickFacts: {
+      duration: "5 Nights / 6 Days",
+      route: "Delhi → Leh → Nubra → Pangong → Leh → Delhi",
+      flightsIncluded: true,
+      bikeType: "Royal Enfield Himalayan 411cc (2 riders per bike)",
+      stayType: "Hotels + Pangong lake-view cottages (double sharing)",
+      mealPlan: "5 Breakfast + 5 Dinner",
+    },
+    offer: {
+      badge: "Founder's offer",
+      headline: "Limited June–September departures",
+      earlyBird: "Early-bird: save up to ₹3,000 on select months",
+      filling: "Small batches — seats move quickly for peak season",
+    },
+    whyStandsOut: [
+      {
+        title: "Flights included, Delhi to Delhi",
+        desc: "Arrive in Leh with energy saved for the ride—round-trip flights are bundled into one clear plan.",
+      },
+      {
+        title: "Premium bike experience",
+        desc: "Royal Enfield Himalayan 411cc, fuel for the full circuit, and a sensible 2-riders-per-bike setup with support.",
+      },
+      {
+        title: "Scenic high-altitude route",
+        desc: "Khardung La, Chang La, and the Shyok approach—epic road feel without the “checklist tour” energy.",
+      },
+      {
+        title: "Pangong cottage stay",
+        desc: "Lake-view cottages and time by the water—so the highlight isn’t a rushed photo stop.",
+      },
+      {
+        title: "Star gazing at altitude",
+        desc: "Clear-sky nights at Pangong for stargazing—weather permitting, it’s a quiet premium moment.",
+      },
+      {
+        title: "Trip captain on the road",
+        desc: "Experienced captain, permits handled, and first-aid backup—adventure with adult supervision.",
+      },
+    ],
+    faq: [
+      {
+        q: "Is this suitable for first-time Ladakh travelers?",
+        a: "Yes—Day 1 is designed for acclimatization in Leh, and the route is paced for comfort. We still recommend a basic fitness level and following captain guidance for altitude care.",
+      },
+      {
+        q: "Is basic bike riding experience enough?",
+        a: "Basic riding experience is recommended. You’ll be on Himalayan roads with some off-road on the Shyok stretch—confidence with clutch, balance, and slow-speed control matters. If you’re unsure, message us and we’ll assess honestly.",
+      },
+      {
+        q: "What is included in Delhi to Delhi?",
+        a: "Flights between Delhi and Leh, your bike and fuel, stays on twin sharing, inner line permits, 5 breakfast + 5 dinner, trip captain, and first aid support for the complete circuit.",
+      },
+      {
+        q: "Are flights included?",
+        a: "Yes—Delhi–Leh–Delhi flights are part of the package, so the trip feels complete from the capital.",
+      },
+      {
+        q: "Can girls join the trip?",
+        a: "Absolutely—Ladakh is for everyone, and we welcome women travelers. We keep groups respectful and well-supported; reach out for any private-room add-ons or questions.",
+      },
+      {
+        q: "How many people are on one bike?",
+        a: "Two riders per bike (pillion or shared riding as per the group plan). Bikes are Royal Enfield Himalayan 411cc.",
+      },
+      {
+        q: "How do I reserve my slot?",
+        a: "Share your preferred month, city, and traveler count via the form on this page, or message us on WhatsApp. We’ll confirm availability, inclusions, and the next step to hold your seat.",
+      },
+    ],
     heroImage:
       "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2400&q=80",
     gallery: [
@@ -38,28 +139,75 @@ export const tours: Tour[] = [
       "https://images.unsplash.com/photo-1500043357865-c6b8827edf32?auto=format&fit=crop&w=2000&q=80",
     ],
     overview:
-      "A premium Ladakh circuit with elegant pacing—Leh acclimatization, high-altitude lakes, quiet monasteries, and cinematic roads.",
+      "Ex Delhi. Flights included. A premium Ladakh bike adventure with Leh acclimatization, Khardung La, Nubra dunes, Pangong Lake cottages, and the Chang La high road.",
+    subtitle: "Ex Delhi | Flights Included | Premium Adventure Experience",
+    hookLine: "Fly to Leh. Ride the Himalayas. Experience the adventure of a lifetime.",
     itinerary: [
-      { day: 1, title: "Arrive in Leh", details: "Gentle arrival, tea, rest, and a short sunset walk." },
-      { day: 2, title: "Acclimatize + Old Town", details: "Soft exploration: markets, heritage lanes, and a monastery visit." },
-      { day: 3, title: "Nubra Valley", details: "Cross Khardung La, dunes at Hunder, and a calm night under stars." },
-      { day: 4, title: "Nubra — Slow day", details: "Monastery, hidden viewpoints, and unhurried photo time." },
-      { day: 5, title: "Pangong Lake", details: "Cinematic drive and a golden-hour lakeside evening." },
-      { day: 6, title: "Pangong to Leh", details: "Return via scenic stops and a relaxed dinner in Leh." },
-      { day: 7, title: "Monasteries + farewell", details: "A final curated loop: culture, quiet, and gifting time." },
-      { day: 8, title: "Depart", details: "Airport transfer and warm send-off." },
+      {
+        day: 1,
+        title: "Delhi → Leh | Arrival & Acclimatization",
+        details:
+          "Flight transfer Delhi to Leh (included). Arrive in Leh (11,500 ft), hotel check-in (double sharing), welcome and rest day for acclimatization. Evening: Hall of Fame; optional local market walk. Meals: Dinner.",
+      },
+      {
+        day: 2,
+        title: "Leh Local Sightseeing + Bike Allocation",
+        details:
+          "Breakfast. Bike allotment (Royal Enfield Himalayan 411cc — 2 riders per bike). Sightseeing: Magnetic Hill, Sangam (Indus & Zanskar confluence), Alchi Monastery, Rancho School (Druk White Lotus School), Thiksey Monastery. Evening: Shanti Stupa (sunset + night view). Meals: Breakfast + Dinner.",
+      },
+      {
+        day: 3,
+        title: "Leh → Nubra Valley (via Khardung La)",
+        details:
+          "Distance ~160 KM (5–6 hrs). Ride via Khardung La (~18,000 ft), one of the world’s highest motorable roads. Enroute: scenic villages and mountain views. Nubra: Diskit Monastery (giant Buddha), Hunder Sand Dunes, optional double-hump Bactrian camel ride. Stay: Hunder/Diskit. Meals: Breakfast + Dinner.",
+      },
+      {
+        day: 4,
+        title: "Nubra → Pangong Lake (via Shyok Route)",
+        details:
+          "Distance ~160 KM (6–7 hrs). Adventure ride via Shyok route (off-road ~20–25 KM). Cross Durbuk (Army base area). Arrive Pangong Lake (14,000 ft), world-famous high-altitude saltwater lake. Experience: lake-view cottages and star gazing (clear sky). Stay: Pangong Lake cottage. Meals: Breakfast + Dinner.",
+      },
+      {
+        day: 5,
+        title: "Pangong → Leh (via Chang La Pass)",
+        details:
+          "Distance ~150 KM (5–6 hrs). Early morning Pangong sunrise. Ride back to Leh via Chang La (~17,000 ft). Evening free time / shopping in Leh market. Stay: Hotel in Leh. Meals: Breakfast + Dinner.",
+      },
+      {
+        day: 6,
+        title: "Leh → Delhi Departure",
+        details:
+          "Breakfast at hotel. Airport drop. Flight back to Delhi. Meals: Breakfast.",
+      },
     ],
     included: [
-      "Boutique stays (double occupancy)",
-      "Local-led experiences and permits",
-      "All in-trip transfers",
-      "Daily breakfast + select dinners",
+      "Delhi–Leh–Delhi flights",
+      "Royal Enfield Himalayan 411cc (2 riders per bike)",
+      "Fuel for complete trip",
+      "All accommodation (double sharing)",
+      "5 breakfast + 5 dinner",
+      "Inner line permits",
+      "Experienced trip captain",
+      "First aid support",
     ],
     excluded: [
-      "Flights to/from Leh",
+      "Lunch",
       "Personal expenses",
+      "Camel ride / entry tickets (if applicable)",
       "Travel insurance",
-      "Anything not explicitly listed as included",
+    ],
+    highlights: [
+      "Ride across 600+ KM Ladakh circuit",
+      "Cross Khardung La & Chang La passes",
+      "Stay at Pangong Lake cottages",
+      "Explore Nubra desert & double-hump camels",
+      "Experience star gazing",
+    ],
+    importantNotes: [
+      "High altitude destination (acclimatization mandatory)",
+      "Valid ID proof required",
+      "Basic riding experience recommended",
+      "Weather conditions may affect itinerary",
     ],
   },
   {

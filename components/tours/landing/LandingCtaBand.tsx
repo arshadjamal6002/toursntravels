@@ -21,7 +21,7 @@ export function LandingCtaBand({
   const wa = useMemo(
     () =>
       waLink(
-        `Hi Altura — I’m on the “${tour.title}” page. Can you share availability, pricing, and the full day-by-day plan?`
+        `Hi MiraGo — I’m on the “${tour.title}” page. Can you share availability, pricing, and the full day-by-day plan?`
       ),
     [tour.title]
   );

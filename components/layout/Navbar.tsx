@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -53,8 +54,29 @@ export function Navbar() {
               )}
             >
               <span className="inline-flex items-center gap-2">
-                <span className={cn("h-2 w-2 rounded-full", solid ? "bg-copper" : "bg-sand/80")} />
-                {site.name}
+                <span className="relative h-8 w-8 overflow-hidden rounded-xl border border-black/10 bg-cream/80">
+                  <Image
+                    src="/images/brand/logo.png"
+                    alt={site.name}
+                    fill
+                    sizes="32px"
+                    className="object-contain p-1"
+                    priority
+                  />
+                </span>
+                <span className="leading-none">
+                  <span className={cn("block", solid ? "text-ink" : "text-sand")}>
+                    {site.name}
+                  </span>
+                  <span
+                    className={cn(
+                      "mt-0.5 block text-[11px] font-medium tracking-[0.12em] uppercase",
+                      solid ? "text-ink/55" : "text-sand/65"
+                    )}
+                  >
+                    {site.tagline}
+                  </span>
+                </span>
               </span>
             </Link>
 

@@ -17,7 +17,7 @@ const fontDisplay = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Altura — Curated Himalayan Escapes",
+  title: "MiraGo — Mera Go-To Travel Partner",
   description:
     "Premium, intimate Himalayan journeys—curated routes, local-led experiences, and cinematic mountain stays.",
 };

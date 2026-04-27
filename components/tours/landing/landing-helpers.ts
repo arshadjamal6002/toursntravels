@@ -24,7 +24,7 @@ export function buildLeadWhatsAppMessage(
   }
 ) {
   const lines = [
-    `Hi Altura — I want details for “${tour.title}”.`,
+    `Hi MiraGo — I want details for “${tour.title}”.`,
     "",
     `Name: ${data.name}`,
     `WhatsApp: ${data.whatsapp}`,

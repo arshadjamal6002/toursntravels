@@ -1,4 +1,4 @@
-## Altura — Curated Himalayan Escapes
+## MiraGo — Mera Go-To Travel Partner
 
 Premium, cinematic tours & travel website built with **Next.js (App Router)** and **Tailwind CSS**. Designed to feel like a curated mountain travel brand (not a generic booking portal), with restrained motion and mobile-first conversion.
 

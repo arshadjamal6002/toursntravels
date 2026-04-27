@@ -9,7 +9,7 @@ export function InquirySidebar({ tour }: { tour: Tour }) {
   const link = useMemo(
     () =>
       waLink(
-        `Hi Altura — I’m interested in “${tour.title}”. Can you share availability, inclusions, and pricing for my dates?`
+        `Hi MiraGo — I’m interested in “${tour.title}”. Can you share availability, inclusions, and pricing for my dates?`
       ),
     [tour.title]
   );

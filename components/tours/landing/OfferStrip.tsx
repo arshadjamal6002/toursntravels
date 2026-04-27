@@ -1,4 +1,4 @@
-import { CalendarRange, Sparkles, TrendingUp } from "lucide-react";
+import { CalendarRange, Sparkles, SlidersHorizontal, TrendingUp } from "lucide-react";
 import type { Tour } from "@/data/tours";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 
@@ -24,12 +24,17 @@ export function OfferStrip({ tour }: { tour: Tour }) {
       label: o.filling ?? "Intimate group size",
       sub: "No oversized convoys on the high road",
     },
+    {
+      icon: SlidersHorizontal,
+      label: o.custom ?? "Custom itineraries available",
+      sub: "Private dates, pacing & comfort tailored to you",
+    },
   ] as const;
 
   return (
     <div className="border-b border-black/10 bg-forest/95 text-sand">
       <div className="mx-auto max-w-7xl px-6 py-4 md:px-10 md:py-5 lg:px-16">
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it, idx) => (
             <SectionReveal key={it.label} delay={0.04 * idx}>
               <div className="flex gap-3 rounded-xl border border-sand/10 bg-ink/20 px-4 py-3 backdrop-blur-sm">

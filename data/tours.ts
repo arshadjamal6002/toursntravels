@@ -18,11 +18,17 @@ export type TourOffer = {
   headline?: string;
   earlyBird?: string;
   filling?: string;
+  custom?: string;
 };
 
 export type TourFaqItem = { q: string; a: string };
 
 export type TourWhyStandsOut = { title: string; desc: string };
+
+export type TourAccordionSection = {
+  title: string;
+  points: string[];
+};
 
 export type Tour = {
   slug: string;
@@ -48,6 +54,8 @@ export type Tour = {
   excluded: string[];
   highlights?: string[];
   importantNotes?: string[];
+  policies?: TourAccordionSection[];
+  thingsToKeepInMind?: TourAccordionSection[];
 };
 
 export const tours: Tour[] = [
@@ -73,6 +81,7 @@ export const tours: Tour[] = [
       headline: "Limited June–September departures",
       earlyBird: "Early-bird: save up to ₹3,000 on select months",
       filling: "Small batches — seats move quickly for peak season",
+      custom: "Custom itineraries available",
     },
     whyStandsOut: [
       {
@@ -131,12 +140,12 @@ export const tours: Tour[] = [
       },
     ],
     heroImage:
-      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2400&q=80",
+      "/images/tours/ladakh-cinematic-circuit/photography.jpg",
     gallery: [
-      "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2000&q=80",
-      "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=2000&q=80",
+      "/images/tours/ladakh-cinematic-circuit/shutter.jpeg",
+      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=2000&q=80",
       "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=2000&q=80",
-      "https://images.unsplash.com/photo-1500043357865-c6b8827edf32?auto=format&fit=crop&w=2000&q=80",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=80",
     ],
     overview:
       "Ex Delhi. Flights included. A premium Ladakh bike adventure with Leh acclimatization, Khardung La, Nubra dunes, Pangong Lake cottages, and the Chang La high road.",
@@ -208,6 +217,91 @@ export const tours: Tour[] = [
       "Valid ID proof required",
       "Basic riding experience recommended",
       "Weather conditions may affect itinerary",
+    ],
+    policies: [
+      {
+        title: "Booking & payments",
+        points: [
+          "A booking is confirmed once your advance is received and the details (names, IDs, travel month) are shared.",
+          "Balance is typically due before the trip start—exact timelines will be shared at the time of confirmation.",
+          "Keep a soft buffer for optional add-ons (camel ride, entry tickets) and personal expenses.",
+        ],
+      },
+      {
+        title: "Cancellation",
+        points: [
+          "Cancellation charges vary by how close you are to the departure date (closer departures usually mean higher charges).",
+          "If we have to adjust dates/route due to weather or road closures, we’ll prioritize safety and practical alternatives.",
+        ],
+      },
+      {
+        title: "Other terms & policies",
+        points: [
+          "This is a high-altitude adventure—trip captain decisions on-road are final for safety.",
+          "Any damage to the bike due to negligence may be chargeable as per the vendor terms.",
+          "Travel insurance is recommended (and not included unless explicitly stated).",
+        ],
+      },
+      {
+        title: "Please note",
+        points: [
+          "Weather and road conditions can impact the exact order of sightseeing.",
+          "Acclimatization is mandatory—avoid overexertion and follow captain guidance.",
+          "Carry a valid government ID (and keep a digital copy).",
+        ],
+      },
+    ],
+    thingsToKeepInMind: [
+      {
+        title: "Pre-tour preparation",
+        points: [
+          "Pack layers: warm innerwear, windproof outer, gloves, and rain protection.",
+          "Carry basic meds (as advised by your doctor) and stay well hydrated.",
+          "Basic riding confidence is recommended—especially for slow-speed control and off-road patches.",
+        ],
+      },
+      {
+        title: "Group riding guidelines",
+        points: [
+          "Maintain safe distance, follow formation, and avoid risky overtakes.",
+          "Stop only at designated points; inform the captain if you need a break.",
+        ],
+      },
+      {
+        title: "On the road",
+        points: [
+          "Start early on long ride days; keep snacks and water accessible.",
+          "Phone network can be limited—plan to be offline and enjoy it.",
+        ],
+      },
+      {
+        title: "Altitude & health",
+        points: [
+          "If you feel headache, nausea, dizziness, or breathlessness—tell the captain immediately.",
+          "Avoid alcohol and smoking during the first days; prioritize rest and hydration.",
+        ],
+      },
+      {
+        title: "Responsibility towards the environment",
+        points: [
+          "Carry your waste back; avoid plastic where possible.",
+          "Respect local culture, monasteries, and photography rules.",
+        ],
+      },
+      {
+        title: "Emergency protocols",
+        points: [
+          "Stay with the group and follow the captain’s instructions in case of weather changes or delays.",
+          "First aid support is available; serious cases may require evacuation depending on location and conditions.",
+        ],
+      },
+      {
+        title: "General etiquette",
+        points: [
+          "Keep noise low at stays; respect local communities and other travelers.",
+          "Be punctual for briefings so the group can ride in better light and safer conditions.",
+        ],
+      },
     ],
   },
   {

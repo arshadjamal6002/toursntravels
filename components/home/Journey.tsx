@@ -21,7 +21,7 @@ export function Journey() {
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <SectionReveal className="lg:col-span-6">
-            <div className="eyebrow">The Altura approach</div>
+            <div className="eyebrow">The MiraGo approach</div>
             <h2 className="mt-4 font-display text-3xl tracking-tight sm:text-4xl">
               A journey that feels intimate, not itinerant.
             </h2>

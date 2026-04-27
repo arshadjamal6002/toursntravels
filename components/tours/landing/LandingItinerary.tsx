@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 import type { Tour, TourItineraryDay } from "@/data/tours";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { cn } from "@/components/ui/cn";
@@ -39,6 +40,7 @@ export function LandingItinerary({ tour }: { tour: Tour }) {
                 onToggle={() => setOpen((cur) => (cur === d.day ? 0 : d.day))}
                 isLast={idx === days.length - 1}
                 revealDelay={0.02 * idx}
+                gallery={tour.gallery}
               />
             ))}
           </div>
@@ -54,13 +56,20 @@ function ItineraryDayRow({
   onToggle,
   isLast,
   revealDelay,
+  gallery,
 }: {
   day: TourItineraryDay;
   isOpen: boolean;
   onToggle: () => void;
   isLast: boolean;
   revealDelay: number;
+  gallery: string[];
 }) {
+  const start = Math.max(0, (d.day - 1) % Math.max(1, gallery.length));
+  const dayGallery = gallery.length
+    ? Array.from({ length: Math.min(3, gallery.length) }, (_, i) => gallery[(start + i) % gallery.length])
+    : [];
+
   return (
     <SectionReveal delay={revealDelay}>
       <div
@@ -113,6 +122,30 @@ function ItineraryDayRow({
                 <p className="pl-0 text-sm leading-7 text-ink/75 md:pl-14">
                   {d.details}
                 </p>
+
+                {dayGallery.length ? (
+                  <div className="mt-5 md:pl-14">
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      {dayGallery.map((src) => (
+                        <div
+                          key={`${d.day}-${src}`}
+                          className="group relative overflow-hidden rounded-2xl border border-black/10 bg-sand shadow-[0_14px_34px_rgba(18,20,15,0.08)]"
+                        >
+                          <div className="relative aspect-[16/11]">
+                            <Image
+                              src={src}
+                              alt={`${d.title} photo`}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
               </div>
             </motion.div>
           ) : null}

@@ -10,7 +10,8 @@ import { LandingCtaBand } from "@/components/tours/landing/LandingCtaBand";
 import { WhyStandsOut } from "@/components/tours/landing/WhyStandsOut";
 import { LandingItinerary } from "@/components/tours/landing/LandingItinerary";
 import { InclusionsExclusions } from "@/components/tours/landing/InclusionsExclusions";
-import { ImportantNotes } from "@/components/tours/landing/ImportantNotes";
+import { PoliciesAndKeepInMind } from "@/components/tours/landing/PoliciesAndKeepInMind";
+import { FloatingBadgeRail } from "@/components/tours/landing/FloatingBadgeRail";
 import { LandingTestimonials } from "@/components/tours/landing/LandingTestimonials";
 import { LandingFAQ } from "@/components/tours/landing/LandingFAQ";
 import { LeadForm } from "@/components/tours/landing/LeadForm";
@@ -29,7 +30,7 @@ export async function generateMetadata({
   const tour = getTourBySlug(slug);
   if (!tour) return { title: "Tour" };
   return {
-    title: `${tour.title} | Altura`,
+    title: `${tour.title} | MiraGo`,
     description: tour.overview,
   };
 }
@@ -46,6 +47,7 @@ export default async function TourDetailPage({
   return (
     <div className="pt-16">
       <TourJsonLd tour={tour} />
+      <FloatingBadgeRail tour={tour} />
       <LandingHero tour={tour} />
       <OfferStrip tour={tour} />
       <QuickFacts tour={tour} />
@@ -65,7 +67,7 @@ export default async function TourDetailPage({
         sub="We’ll answer altitude, pillion, packing, and honest pros/cons for your month."
       />
       <InclusionsExclusions tour={tour} />
-      <ImportantNotes tour={tour} />
+      <PoliciesAndKeepInMind tour={tour} />
       <LandingTestimonials />
       <LandingFAQ tour={tour} />
       <LeadForm tour={tour} />

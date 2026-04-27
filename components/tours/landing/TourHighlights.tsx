@@ -16,10 +16,26 @@ export function TourHighlights({ tour }: { tour: Tour }) {
   const items = tour.highlights;
   if (!items?.length) return null;
 
-  const hero = tour.heroImage;
+  const youtubeId = "3lmGfN-8C6I";
+  const youtubeSrc = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&playsinline=1&loop=1&playlist=${youtubeId}&rel=0`;
+  const ladakhImage = tour.gallery?.[0] ?? tour.heroImage;
   return (
-    <section className="section bg-cream">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
+    <section className="relative section overflow-hidden bg-cream">
+      {/* Full-section background video */}
+      <div className="pointer-events-none absolute inset-0">
+        <iframe
+          className="absolute inset-0 h-full w-full [transform:scale(1.55)]"
+          src={youtubeSrc}
+          title={`${tour.title} background`}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          referrerPolicy="strict-origin-when-cross-origin"
+        />
+        {/* Keep full video color; add subtle vignette for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/10 via-transparent to-ink/15" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_25%_20%,rgba(18,20,15,0.18),transparent_60%)]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-5">
             <SectionReveal>
@@ -32,15 +48,16 @@ export function TourHighlights({ tour }: { tour: Tour }) {
                 checklist. Each line below is a real beat on the route.
               </p>
             </SectionReveal>
-            <div className="relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-2xl border border-black/10 shadow-[0_26px_70px_rgba(18,20,15,0.12)] lg:block">
+            <div className="group relative mt-8 hidden aspect-[4/5] overflow-hidden rounded-2xl border border-black/10 bg-cream/55 shadow-[0_26px_70px_rgba(18,20,15,0.12)] backdrop-blur-md lg:block">
               <Image
-                src={hero}
-                alt={tour.title}
+                src={ladakhImage}
+                alt={`${tour.title} highlight`}
                 fill
-                className="object-cover"
                 sizes="(max-width: 1024px) 0vw, 40vw"
+                className="object-cover opacity-[0.92] transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-white/10" />
             </div>
           </div>
 
@@ -53,7 +70,7 @@ export function TourHighlights({ tour }: { tour: Tour }) {
                     <div
                       className={cn(
                         "group relative h-full overflow-hidden rounded-2xl border border-black/10",
-                        "bg-sand/80 p-5 shadow-[0_16px_40px_rgba(18,20,15,0.08)]"
+                        "bg-sand/82 p-5 shadow-[0_16px_40px_rgba(18,20,15,0.08)] backdrop-blur-md"
                       )}
                     >
                       <div className="flex items-start gap-3">
@@ -72,15 +89,16 @@ export function TourHighlights({ tour }: { tour: Tour }) {
                 );
               })}
             </div>
-            <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-black/10 shadow-[0_20px_50px_rgba(18,20,15,0.1)] lg:hidden">
+            <div className="group relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-black/10 bg-cream/60 shadow-[0_20px_50px_rgba(18,20,15,0.1)] backdrop-blur-sm lg:hidden">
               <Image
-                src={hero}
-                alt={tour.title}
+                src={ladakhImage}
+                alt={`${tour.title} highlight`}
                 fill
-                className="object-cover"
                 sizes="100vw"
+                className="object-cover opacity-[0.9] transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 ring-1 ring-white/10" />
             </div>
           </div>
         </div>

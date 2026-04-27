@@ -1,17 +1,17 @@
 export const site = {
-  name: "Altura",
-  tagline: "Curated Himalayan Escapes",
+  name: "MiraGo",
+  tagline: "Mera Go-To Travel Partner",
   description:
     "Premium, intimate Himalayan journeys—curated routes, local-led experiences, and cinematic mountain stays.",
   contact: {
-    email: "hello@altura.travel",
-    phone: "+91 90000 00000",
-    whatsappE164: "+919000000000",
+    email: "bookings@mirago.fun",
+    phone: "+91 9596213610",
+    whatsappE164: "+919596213610",
     whatsappDefaultText:
-      "Hi Altura — I’m interested in a curated Himalayan trip. Can you share availability and pricing?",
+      "Hi MiraGo — I’m interested in a curated trip. Can you share availability and pricing?",
   },
   social: {
-    instagram: "https://instagram.com/",
+    instagram: "https://instagram.com/mirago.trips",
   },
 } as const;
 

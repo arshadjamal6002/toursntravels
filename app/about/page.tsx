@@ -3,18 +3,18 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { site } from "@/lib/site";
 import { HeartHandshake, Map, Sparkles } from "lucide-react";
 
-const values = [
+const founders = [
   {
-    title: "Curated, not crowded",
-    desc: "We design routes around light, silence, and pacing—so your trip feels intimate, not industrial.",
+    name: "Ritesh",
+    src: "/images/about/founders/20240609225650804.jpeg",
   },
   {
-    title: "Premium with warmth",
-    desc: "Elegant stays and details that matter, without the stiff, mass-market luxury tone.",
+    name: "Arshad",
+    src: "/images/about/founders/877abf8f-a0d7-4bd8-aa90-7df73c9cc0fa.jpg",
   },
   {
-    title: "Local-led trust",
-    desc: "On-ground partners who know conditions in real time, and guide you like a friend, not a handler.",
+    name: "Meiraj",
+    src: "/images/about/founders/f8f57d4a-e0d6-403c-9884-4dfb28dd0f1e.jpg",
   },
 ] as const;
 
@@ -94,14 +94,25 @@ export default function AboutPage() {
             </SectionReveal>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {values.map((v, idx) => (
-              <SectionReveal key={v.title} delay={0.05 * idx}>
-                <div className="card p-6">
-                  <div className="font-display text-xl tracking-tight text-ink">
-                    {v.title}
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {founders.map((f, idx) => (
+              <SectionReveal key={f.name} delay={0.05 * idx}>
+                <div className="card group overflow-hidden p-0">
+                  <div className="relative aspect-[4/5]">
+                    <Image
+                      src={f.src}
+                      alt={f.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute bottom-4 right-4 translate-y-1 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                      <div className="inline-flex items-center rounded-full bg-ink/70 px-3 py-1 text-sm font-semibold text-sand shadow-sm backdrop-blur">
+                        {f.name}
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-ink/70">{v.desc}</p>
                 </div>
               </SectionReveal>
             ))}

@@ -13,7 +13,7 @@ export function LandingHero({ tour }: { tour: Tour }) {
   const wa = useMemo(
     () =>
       waLink(
-        `Hi Altura — I’m interested in “${tour.title}” (from your landing page). Can you share the full itinerary, dates, and pricing?`
+        `Hi MiraGo — I’m interested in “${tour.title}” (from your landing page). Can you share the full itinerary, dates, and pricing?`
       ),
     [tour.title]
   );

@@ -9,7 +9,7 @@ export function StickyMobileCTA({ tour }: { tour: Tour }) {
   const wa = useMemo(
     () =>
       waLink(
-        `Hi Altura — I’m interested in “${tour.title}”. Can we chat on WhatsApp?`
+        `Hi MiraGo — I’m interested in “${tour.title}”. Can we chat on WhatsApp?`
       ),
     [tour.title]
   );

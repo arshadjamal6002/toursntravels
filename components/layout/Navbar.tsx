@@ -53,30 +53,23 @@ export function Navbar() {
                 solid ? "text-ink" : "text-sand"
               )}
             >
-              <span className="inline-flex items-center gap-2">
-                <span className="relative h-8 w-8 overflow-hidden rounded-xl border border-black/10 bg-cream/80">
-                  <Image
-                    src="/images/brand/logo.png"
-                    alt={site.name}
-                    fill
-                    sizes="32px"
-                    className="object-contain p-1"
-                    priority
-                  />
-                </span>
-                <span className="leading-none">
-                  <span className={cn("block", solid ? "text-ink" : "text-sand")}>
-                    {site.name}
-                  </span>
-                  <span
-                    className={cn(
-                      "mt-0.5 block text-[11px] font-medium tracking-[0.12em] uppercase",
-                      solid ? "text-ink/55" : "text-sand/65"
-                    )}
-                  >
-                    {site.tagline}
-                  </span>
-                </span>
+              <span className="inline-flex items-center gap-4">
+                <Image
+                  src="/images/brand/svg.svg"
+                  alt={`${site.name} logo`}
+                  width={320}
+                  height={80}
+                  priority
+                  className="h-16 w-auto"
+                />
+                <Image
+                  src="/images/brand/tagline.svg"
+                  alt={`${site.name} tagline`}
+                  width={900}
+                  height={200}
+                  priority={false}
+                  className="h-14 w-auto sm:h-16 md:h-18"
+                />
               </span>
             </Link>
 

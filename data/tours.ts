@@ -56,6 +56,11 @@ export type Tour = {
   importantNotes?: string[];
   policies?: TourAccordionSection[];
   thingsToKeepInMind?: TourAccordionSection[];
+  /** Optional social proof for conversion-first hero */
+  rating?: number;
+  reviewCount?: number;
+  nextBatchDate?: string;
+  spotsLeft?: number;
 };
 
 export const tours: Tour[] = [
@@ -67,6 +72,10 @@ export const tours: Tour[] = [
     priceFrom: 42000,
     difficulty: "Moderate",
     bestSeason: "Jun–Sep",
+    rating: 4.9,
+    reviewCount: 200,
+    nextBatchDate: "15 Jun",
+    spotsLeft: 5,
     trustChips: ["Ex Delhi", "Flights Included", "5N/6D", "600+ KM Circuit"],
     quickFacts: {
       duration: "5 Nights / 6 Days",

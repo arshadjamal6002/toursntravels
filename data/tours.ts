@@ -61,6 +61,16 @@ export type Tour = {
   reviewCount?: number;
   nextBatchDate?: string;
   spotsLeft?: number;
+  /** Strikethrough list price — only when genuinely discounted */
+  listPrice?: number;
+  /** Prominent hero price; falls back to priceFrom */
+  salePrice?: number;
+  /** e.g. "Save ₹6,000 · Limited May slots" */
+  priceUrgency?: string;
+  /** Max 3 short badges for first fold */
+  foldBadges?: string[];
+  ridersCount?: number;
+  verifiedLabel?: string;
 };
 
 export const tours: Tour[] = [
@@ -73,9 +83,15 @@ export const tours: Tour[] = [
     difficulty: "Moderate",
     bestSeason: "Jun–Sep",
     rating: 4.9,
-    reviewCount: 200,
+    reviewCount: 120,
+    ridersCount: 500,
+    verifiedLabel: "Verified Operator",
     nextBatchDate: "15 Jun",
     spotsLeft: 5,
+    listPrice: 42000,
+    salePrice: 36000,
+    priceUrgency: "Save ₹6,000 · Limited May slots",
+    foldBadges: ["Flights Included", "Royal Enfield", "24/7 Support"],
     trustChips: ["Ex Delhi", "Flights Included", "5N/6D", "600+ KM Circuit"],
     quickFacts: {
       duration: "5 Nights / 6 Days",
@@ -130,10 +146,6 @@ export const tours: Tour[] = [
       {
         q: "What is included in Delhi to Delhi?",
         a: "Flights between Delhi and Leh, your bike and fuel, stays on twin sharing, inner line permits, 5 breakfast + 5 dinner, trip captain, and first aid support for the complete circuit.",
-      },
-      {
-        q: "Are flights included?",
-        a: "Yes—Delhi–Leh–Delhi flights are part of the package, so the trip feels complete from the capital.",
       },
       {
         q: "Can girls join the trip?",

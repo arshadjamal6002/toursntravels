@@ -4,7 +4,7 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 
 export function InclusionsExclusions({ tour }: { tour: Tour }) {
   return (
-    <section className="section bg-cream">
+    <section id="inclusions" className="section scroll-mt-28 bg-cream">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <SectionReveal>
           <div className="eyebrow">Inclusions</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { Tour, TourAccordionSection } from "@/data/tours";
@@ -75,7 +75,115 @@ function AccordionGroup({
   );
 }
 
-export function PoliciesAndKeepInMind({ tour }: { tour: Tour }) {
+function CompactPolicies({ tour }: { tour: Tour }) {
+  const sections = useMemo(() => {
+    return [...(tour.policies ?? []), ...(tour.thingsToKeepInMind ?? [])];
+  }, [tour.policies, tour.thingsToKeepInMind]);
+
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [openSection, setOpenSection] = useState<string>("");
+
+  if (!sections.length) return null;
+
+  return (
+    <section className="border-t border-black/10 bg-sand py-6">
+      <div className="mx-auto max-w-3xl px-6 md:px-10 lg:px-16">
+        <button
+          type="button"
+          className="flex w-full items-center justify-between gap-3 rounded-xl border border-black/10 bg-cream/80 px-4 py-3.5 text-left transition hover:bg-cream"
+          onClick={() => setPanelOpen((v) => !v)}
+          aria-expanded={panelOpen}
+        >
+          <span className="text-sm font-semibold text-ink">
+            Policies, cancellation & trip notes
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-5 w-5 shrink-0 text-ink/50 transition-transform",
+              panelOpen && "rotate-180"
+            )}
+          />
+        </button>
+
+        <AnimatePresence initial={false}>
+          {panelOpen ? (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-3 space-y-2">
+                {sections.map((s) => {
+                  const isOpen = openSection === s.title;
+                  return (
+                    <div
+                      key={s.title}
+                      className="overflow-hidden rounded-xl border border-black/8 bg-cream/90"
+                    >
+                      <button
+                        type="button"
+                        className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                        onClick={() =>
+                          setOpenSection((cur) =>
+                            cur === s.title ? "" : s.title
+                          )
+                        }
+                        aria-expanded={isOpen}
+                      >
+                        <span className="text-xs font-semibold text-ink/85">
+                          {s.title}
+                        </span>
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 shrink-0 text-ink/45 transition",
+                            isOpen && "rotate-180"
+                          )}
+                        />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {isOpen ? (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ul className="space-y-2 border-t border-black/6 px-4 pb-3 pt-2 text-xs leading-6 text-ink/65">
+                              {s.points.map((p) => (
+                                <li key={p} className="flex gap-2">
+                                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-copper/70" />
+                                  {p}
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        ) : null}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+}
+
+export function PoliciesAndKeepInMind({
+  tour,
+  compact = false,
+}: {
+  tour: Tour;
+  compact?: boolean;
+}) {
+  if (compact) {
+    return <CompactPolicies tour={tour} />;
+  }
+
   const policies = tour.policies;
   const keep = tour.thingsToKeepInMind;
   if (!policies?.length && !keep?.length) return null;
@@ -110,4 +218,3 @@ export function PoliciesAndKeepInMind({ tour }: { tour: Tour }) {
     </section>
   );
 }
-

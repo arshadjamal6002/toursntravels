@@ -2,20 +2,16 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getTourBySlug, tours } from "@/data/tours";
 import { TourJsonLd } from "@/components/tours/landing/TourJsonLd";
+import { TourBreadcrumbs } from "@/components/tours/landing/TourBreadcrumbs";
 import { LandingHero } from "@/components/tours/landing/LandingHero";
-import { OfferStrip } from "@/components/tours/landing/OfferStrip";
-import { QuickFacts } from "@/components/tours/landing/QuickFacts";
-import { TourHighlights } from "@/components/tours/landing/TourHighlights";
-import { LandingCtaBand } from "@/components/tours/landing/LandingCtaBand";
-import { WhyStandsOut } from "@/components/tours/landing/WhyStandsOut";
+import { TourHighlightsCompact } from "@/components/tours/landing/TourHighlightsCompact";
+import { LandingSectionNav } from "@/components/tours/landing/LandingSectionNav";
 import { LandingItinerary } from "@/components/tours/landing/LandingItinerary";
 import { InclusionsExclusions } from "@/components/tours/landing/InclusionsExclusions";
-import { PoliciesAndKeepInMind } from "@/components/tours/landing/PoliciesAndKeepInMind";
-import { FloatingBadgeRail } from "@/components/tours/landing/FloatingBadgeRail";
-import { LandingTestimonials } from "@/components/tours/landing/LandingTestimonials";
 import { LandingFAQ } from "@/components/tours/landing/LandingFAQ";
 import { LeadForm } from "@/components/tours/landing/LeadForm";
-import { StickyMobileCTA } from "@/components/tours/landing/StickyMobileCTA";
+import { PoliciesAndKeepInMind } from "@/components/tours/landing/PoliciesAndKeepInMind";
+import { FloatingContactRail } from "@/components/tours/landing/FloatingContactRail";
 
 export function generateStaticParams() {
   return tours.map((t) => ({ slug: t.slug }));
@@ -47,31 +43,16 @@ export default async function TourDetailPage({
   return (
     <div className="pt-16">
       <TourJsonLd tour={tour} />
-      <FloatingBadgeRail tour={tour} />
+      <TourBreadcrumbs tour={tour} />
       <LandingHero tour={tour} />
-      <OfferStrip tour={tour} />
-      <QuickFacts tour={tour} />
-      <TourHighlights tour={tour} />
-      <LandingCtaBand
-        tour={tour}
-        variant="full"
-        heading="Want every day in writing?"
-        sub="Get the full breakdown — where we stop, what’s included, and what to expect on the passes."
-      />
-      <WhyStandsOut tour={tour} />
+      <TourHighlightsCompact tour={tour} />
+      <LandingSectionNav tour={tour} />
       <LandingItinerary tour={tour} />
-      <LandingCtaBand
-        tour={tour}
-        variant="whatsappOnly"
-        heading="Prefer to talk it through on WhatsApp?"
-        sub="We’ll answer altitude, pillion, packing, and honest pros/cons for your month."
-      />
       <InclusionsExclusions tour={tour} />
-      <PoliciesAndKeepInMind tour={tour} />
-      <LandingTestimonials />
-      <LandingFAQ tour={tour} />
+      <LandingFAQ tour={tour} maxItems={6} />
       <LeadForm tour={tour} />
-      <StickyMobileCTA tour={tour} />
+      <PoliciesAndKeepInMind tour={tour} compact />
+      <FloatingContactRail tour={tour} />
     </div>
   );
 }

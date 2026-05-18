@@ -13,7 +13,7 @@ export function LandingItinerary({ tour }: { tour: Tour }) {
   const [open, setOpen] = useState<number>(1);
 
   return (
-    <section className="section bg-sand">
+    <section id="itinerary" className="section scroll-mt-28 bg-sand">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <SectionReveal>
           <div className="eyebrow">The flow</div>

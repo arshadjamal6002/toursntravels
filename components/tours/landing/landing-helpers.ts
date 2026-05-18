@@ -4,6 +4,7 @@ import {
   Bike,
   Bus,
   Car,
+  Headphones,
   Plane,
   Ticket,
   UserCheck,
@@ -46,10 +47,117 @@ export function getUrgencyLine(tour: Tour): string | null {
   return null;
 }
 
+export type PricingDisplay = {
+  listPrice?: number;
+  salePrice: number;
+  savingsAmount?: number;
+  urgencyLine?: string;
+  hasDiscount: boolean;
+};
+
+export function getPricingDisplay(tour: Tour): PricingDisplay {
+  const salePrice = tour.salePrice ?? tour.priceFrom;
+  const listPrice = tour.listPrice;
+  const hasDiscount =
+    listPrice != null && listPrice > salePrice;
+  const savingsAmount = hasDiscount ? listPrice - salePrice : undefined;
+
+  let urgencyLine = tour.priceUrgency;
+  if (!urgencyLine && savingsAmount) {
+    urgencyLine = `Save ₹${savingsAmount.toLocaleString("en-IN")}`;
+    const extra = getUrgencyLine(tour);
+    if (extra) urgencyLine += ` · ${extra}`;
+  } else if (!urgencyLine) {
+    urgencyLine = getUrgencyLine(tour) ?? undefined;
+  }
+
+  return {
+    listPrice: hasDiscount ? listPrice : undefined,
+    salePrice,
+    savingsAmount,
+    urgencyLine,
+    hasDiscount,
+  };
+}
+
+export function getDurationBadge(tour: Tour): string {
+  const fromChips = tour.trustChips?.find((c) => /\d+\s*N\s*\/\s*\d+\s*D/i.test(c));
+  if (fromChips) return fromChips;
+  if (tour.days >= 2) return `${tour.days - 1}N/${tour.days}D`;
+  return `${tour.days} day${tour.days === 1 ? "" : "s"}`;
+}
+
+export function getRouteSummary(tour: Tour): string | null {
+  return tour.quickFacts?.route ?? null;
+}
+
+export function getHeroSlides(tour: Tour): string[] {
+  const slides: string[] = [tour.heroImage];
+  for (const src of tour.gallery ?? []) {
+    if (slides.length >= 3) break;
+    if (!slides.includes(src)) slides.push(src);
+  }
+  return slides;
+}
+
+export function getFoldBadges(tour: Tour): string[] {
+  const duration = getDurationBadge(tour);
+  const extras: string[] = [];
+
+  if (tour.foldBadges?.length) {
+    for (const b of tour.foldBadges) {
+      if (/24\s*\/\s*7/i.test(b)) continue;
+      extras.push(b);
+      if (extras.length >= 2) break;
+    }
+  } else {
+    if (tour.quickFacts?.flightsIncluded) extras.push("Flights Included");
+    if (tour.quickFacts?.bikeType) {
+      extras.push(
+        tour.quickFacts.bikeType.includes("Royal Enfield")
+          ? "Royal Enfield"
+          : "Bike Included"
+      );
+    }
+  }
+
+  return [duration, ...extras].slice(0, 3);
+}
+
 export type InclusionIconItem = {
   icon: LucideIcon;
   label: string;
 };
+
+/** Exactly 4 icons for the simplified first fold */
+export function getFoldInclusions(tour: Tour): InclusionIconItem[] {
+  const q = tour.quickFacts;
+  const items: InclusionIconItem[] = [];
+
+  if (q?.flightsIncluded) {
+    items.push({ icon: Plane, label: "Return Flights" });
+  } else {
+    items.push({ icon: Bus, label: "Transport" });
+  }
+
+  if (q?.bikeType) {
+    items.push({
+      icon: Bike,
+      label: q.bikeType.includes("Royal Enfield")
+        ? "Royal Enfield"
+        : "Bike",
+    });
+  }
+
+  if (q?.stayType) {
+    const nights = tour.days > 1 ? `${tour.days - 1}N` : `${tour.days}D`;
+    items.push({ icon: BedDouble, label: `Hotels (${nights})` });
+  }
+
+  items.push({ icon: Headphones, label: "24/7 Support" });
+
+  return items.slice(0, 4);
+}
 
 export function getInclusionIcons(tour: Tour): InclusionIconItem[] {
   const q = tour.quickFacts;
@@ -91,6 +199,24 @@ export function getInclusionIcons(tour: Tour): InclusionIconItem[] {
   }
 
   return items.slice(0, 6);
+}
+
+export function getFoldTrustLine(tour: Tour): string {
+  const parts: string[] = [];
+  if (tour.ridersCount != null && tour.ridersCount > 0) {
+    parts.push(`${tour.ridersCount}+ Happy Riders`);
+  } else if (tour.reviewCount != null && tour.reviewCount > 0) {
+    parts.push(`${tour.reviewCount}+ travelers`);
+  }
+  if (tour.rating != null) {
+    const reviewPart =
+      tour.reviewCount != null && tour.reviewCount > 0
+        ? ` (${tour.reviewCount} reviews)`
+        : "";
+    parts.push(`${tour.rating}★${reviewPart}`);
+  }
+  parts.push(tour.verifiedLabel ?? "Verified Operator");
+  return parts.join(" • ");
 }
 
 export function getHeaderTrustItems(tour: Tour): string[] {

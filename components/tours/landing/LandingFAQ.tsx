@@ -1,19 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { Tour } from "@/data/tours";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { cn } from "@/components/ui/cn";
 
-export function LandingFAQ({ tour }: { tour: Tour }) {
-  const items = tour.faq;
+export function LandingFAQ({
+  tour,
+  maxItems,
+}: {
+  tour: Tour;
+  maxItems?: number;
+}) {
+  const items = useMemo(() => {
+    const faq = tour.faq;
+    if (!faq?.length) return [];
+    return maxItems ? faq.slice(0, maxItems) : faq;
+  }, [tour.faq, maxItems]);
   const [open, setOpen] = useState(0);
-  if (!items?.length) return null;
+  if (!items.length) return null;
 
   return (
-    <section className="section bg-cream">
+    <section id="faq" className="section scroll-mt-28 bg-cream">
       <div className="mx-auto max-w-3xl px-6 md:px-10 lg:px-16">
         <SectionReveal>
           <div className="eyebrow">FAQ</div>
